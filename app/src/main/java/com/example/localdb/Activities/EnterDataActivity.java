@@ -23,13 +23,12 @@ public class EnterDataActivity extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("Enter Data");
         setContentView(R.layout.activity_enter_data);
+        mDatabaseHelper = new DatabaseHelper(this);
         btnSave= findViewById(R.id.btnSave);
         txtName= findViewById(R.id.txtName);
         txtAge= findViewById(R.id.txtAge);
