@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.localdb.Classes.DatabaseHelper;
+import com.example.localdb.Classes.User;
 import com.example.localdb.R;
+
+import java.lang.reflect.Array;
 
 public class EnterDataActivity extends AppCompatActivity {
 
@@ -19,6 +22,7 @@ public class EnterDataActivity extends AppCompatActivity {
     private EditText txtAge;
     private EditText txtJob;
     private EditText txtGender;
+    private User use;
 
     DatabaseHelper mDatabaseHelper;
 
@@ -35,13 +39,13 @@ public class EnterDataActivity extends AppCompatActivity {
         txtJob= findViewById(R.id.txtJob);
         txtGender= findViewById(R.id.txtGender);
 
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String userName = txtName.getText().toString();
                 if (txtName.length() != 0) {
-                    AddData(userName);
                     txtName.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -50,7 +54,6 @@ public class EnterDataActivity extends AppCompatActivity {
 
                 String userAge = txtAge.getText().toString();
                 if (txtAge.length() != 0) {
-                    AddData(userAge);
                     txtAge.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -59,7 +62,6 @@ public class EnterDataActivity extends AppCompatActivity {
 
                 String userJob = txtJob.getText().toString();
                 if (txtJob.length() != 0) {
-                    AddData(userJob);
                     txtJob.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
@@ -68,12 +70,12 @@ public class EnterDataActivity extends AppCompatActivity {
 
                 String userGender = txtGender.getText().toString();
                 if (txtGender.length() != 0) {
-                    AddData(userGender);
                     txtGender.setText("");
                 } else {
                     toastMessage("You must put something in the text field!");
                 }
 
+                mDatabaseHelper.addData(userName,userAge,userJob,userGender);
 
 
                 Intent intent = new Intent(EnterDataActivity.this, SavedDataActivity.class);
@@ -84,9 +86,9 @@ public class EnterDataActivity extends AppCompatActivity {
 
     }
 
-    public void AddData(String newEntry) {
+    public void AddData(String name, String age, String job, String gender) {
 
-        boolean insertData = mDatabaseHelper.addData(newEntry);
+        boolean insertData = mDatabaseHelper.addData(name,age,job,gender);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

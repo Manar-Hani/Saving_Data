@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "employees_table";
+    private static final String TABLE_NAME = "employee_table";
     private static final String COL1 = "id";
     private static final String COL2 = "name";
     private static final String COL3 = "age";
@@ -45,17 +45,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String item) {
+    public boolean addData(String name,String age, String job, String gender) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         //contentValues.put(COL1,0);
-        contentValues.put(COL2, item);
-        contentValues.put(COL3, item);
-        contentValues.put(COL4, item);
-        contentValues.put(COL5, item);
+        contentValues.put(COL2, name);
+        contentValues.put(COL3, age);
+        contentValues.put(COL4, job);
+        contentValues.put(COL5, gender);
 
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + name + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + age + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + job + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + gender + " to " + TABLE_NAME);
+
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
