@@ -49,6 +49,7 @@ public class SavedDataActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), EnterDataActivity.class);
         startActivityForResult(myIntent, 0);
+        SavedDataActivity.this.finish();
         return true;
     }
 }

@@ -96,7 +96,12 @@ public class EnterDataActivity extends AppCompatActivity {
             }
         });
 
+//        EnterDataActivity.this.finish();
+
+
     }
+
+
 
     public void AddData(String name, String age, String job, String gender) {
 
