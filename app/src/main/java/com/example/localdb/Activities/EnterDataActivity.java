@@ -81,13 +81,13 @@ public class EnterDataActivity extends AppCompatActivity {
                     userGender = "Female";
                     female.setChecked(false);
                 }
-                else {
-                    toastMessage("You must check one!");
-                }
+//                else {
+//                    toastMessage("You must check one!");
+//                }
 
                 AddData(userName,userAge,userJob,userGender);
 
-                mDatabaseHelper.addData(userName,userAge,userJob,userGender);
+               // mDatabaseHelper.addData(userName,userAge,userJob,userGender);
 
 
                 Intent intent = new Intent(EnterDataActivity.this, SavedDataActivity.class);
