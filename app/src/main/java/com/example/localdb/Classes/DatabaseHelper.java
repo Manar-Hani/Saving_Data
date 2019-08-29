@@ -1,16 +1,21 @@
 package com.example.localdb.Classes;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DatabaseHelper";
 
-    private static final String TABLE_NAME = "users_table";
+    private static final String TABLE_NAME = "employees_table";
     private static final String COL1 = "id";
     private static final String COL2 = "name";
     private static final String COL3 = "age";
@@ -62,6 +67,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    public ArrayList<HashMap<String, String>> GetUsers(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        String query = "SELECT name, age, job, gender FROM "+ TABLE_NAME;
+        @SuppressLint("Recycle") Cursor cursor = db.rawQuery(query,null);
+        while (cursor.moveToNext()){
+            HashMap<String,String> user = new HashMap<>();
+           // user.put("id",cursor.getString(cursor.getColumnIndex(COL1)));
+            user.put("name",cursor.getString(cursor.getColumnIndex(COL2)));
+            user.put("age",cursor.getString(cursor.getColumnIndex(COL3)));
+            user.put("job",cursor.getString(cursor.getColumnIndex(COL4)));
+            user.put("gender",cursor.getString(cursor.getColumnIndex(COL5)));
+
+            userList.add(user);
+        }
+        return  userList;
+    }
+    // Get User Details based on userid
+    public ArrayList<HashMap<String, String>> GetUserByUserId(int userid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> userList = new ArrayList<>();
+        String query = "SELECT name, age, job, gender FROM "+ TABLE_NAME;
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COL1, COL2, COL3, COL4, COL5}, COL1+ "=?",new String[]{String.valueOf(userid)},null, null, null, null);
+        if (cursor.moveToNext()){
+            HashMap<String,String> user = new HashMap<>();
+           // user.put("id",cursor.getString(cursor.getColumnIndex(COL1)));
+            user.put("name",cursor.getString(cursor.getColumnIndex(COL2)));
+            user.put("age",cursor.getString(cursor.getColumnIndex(COL3)));
+            user.put("job",cursor.getString(cursor.getColumnIndex(COL4)));
+            user.put("gender",cursor.getString(cursor.getColumnIndex(COL5)));
+
+            userList.add(user);
+        }
+        return  userList;
     }
 
 
