@@ -1,10 +1,12 @@
 package com.example.localdb.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,12 +23,13 @@ public class EnterDataActivity extends AppCompatActivity {
     private EditText txtName;
     private EditText txtAge;
     private EditText txtJob;
-    private EditText txtGender;
-    private User use;
+    private CheckBox male;
+    private CheckBox female;
 
     DatabaseHelper mDatabaseHelper;
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,8 @@ public class EnterDataActivity extends AppCompatActivity {
         txtName= findViewById(R.id.txtName);
         txtAge= findViewById(R.id.txtAge);
         txtJob= findViewById(R.id.txtJob);
-        txtGender= findViewById(R.id.txtGender);
+        male= findViewById(R.id.checkBoxMale);
+        female= findViewById(R.id.checkBoxFemale);
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -68,12 +72,20 @@ public class EnterDataActivity extends AppCompatActivity {
                 }
 
 
-                String userGender = txtGender.getText().toString();
-                if (txtGender.length() != 0) {
-                    txtGender.setText("");
-                } else {
-                    toastMessage("You must put something in the text field!");
+                String userGender = "";
+                if (male.isChecked()) {
+                    userGender = "Male";
+                    male.setChecked(false);
                 }
+                if (female.isChecked()) {
+                    userGender = "Female";
+                    female.setChecked(false);
+                }
+                else {
+                    toastMessage("You must check one!");
+                }
+
+                AddData(userName,userAge,userJob,userGender);
 
                 mDatabaseHelper.addData(userName,userAge,userJob,userGender);
 
