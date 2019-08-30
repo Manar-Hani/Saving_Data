@@ -96,11 +96,15 @@ public class EnterDataActivity extends AppCompatActivity {
             }
         });
 
-//        EnterDataActivity.this.finish();
-
 
     }
 
+    @Override
+    public void onBackPressed()
+    {
+           EnterDataActivity.this.finish();
+           finish();
+    }
 
 
     public void AddData(String name, String age, String job, String gender) {

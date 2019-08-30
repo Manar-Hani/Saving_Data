@@ -35,8 +35,6 @@ public class SavedDataActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
 
-
-
         setContentView(R.layout.activity_saved_data);
         DatabaseHelper db = new DatabaseHelper(this);
         ArrayList<HashMap<String, String>> userList = db.GetUsers();
@@ -51,5 +49,13 @@ public class SavedDataActivity extends AppCompatActivity {
         startActivityForResult(myIntent, 0);
         SavedDataActivity.this.finish();
         return true;
+
     }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(SavedDataActivity.this, EnterDataActivity.class);
+        startActivity(intent);
+    }
+
 }

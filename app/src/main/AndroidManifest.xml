@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SavedDataActivity"></activity>
-        <activity android:name=".Activities.EnterDataActivity">
+        <activity android:name=".Activities.SavedDataActivity"
+            android:noHistory="true" />
+
+        <activity android:name=".Activities.EnterDataActivity"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
